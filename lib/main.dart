@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:async';
@@ -52,12 +53,14 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
   bool mM7ButtonEnabled = true;
 
 
+
   void toggleMajorButton() {
     setState(() {
       if (chords.any((element) => element.contains('C'))) {
         chords.removeWhere((element) => element.contains('C'));
       } else {
-        chords.add(['C', 'F', 'Bb', 'Eb', 'Ab', 'Db', 'Gb', 'B', 'E', 'A', 'D', 'G']);
+        chords.add(
+            ['C', 'F', 'Bb', 'Eb', 'Ab', 'Db', 'Gb', 'B', 'E', 'A', 'D', 'G']);
       }
       majorButtonEnabled = !majorButtonEnabled;
     });
@@ -68,7 +71,20 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('Cm'))) {
         chords.removeWhere((element) => element.contains('Cm'));
       } else {
-        chords.add(['Cm', 'Fm', 'Bbm', 'Ebm', 'Abm', 'Dbm', 'Gbm', 'Bm', 'Em', 'Am', 'Dm', 'Gm']);
+        chords.add([
+          'Cm',
+          'Fm',
+          'Bbm',
+          'Ebm',
+          'Abm',
+          'Dbm',
+          'Gbm',
+          'Bm',
+          'Em',
+          'Am',
+          'Dm',
+          'Gm'
+        ]);
       }
       minorButtonEnabled = !minorButtonEnabled;
     });
@@ -79,7 +95,20 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('Caug'))) {
         chords.removeWhere((element) => element.contains('Caug'));
       } else {
-        chords.add(['Caug', 'Faug', 'Bbaug', 'Ebaug', 'Abaug', 'Dbaug', 'Gbaug', 'Baug', 'Eaug', 'Aaug', 'Daug', 'Gaug']);
+        chords.add([
+          'Caug',
+          'Faug',
+          'Bbaug',
+          'Ebaug',
+          'Abaug',
+          'Dbaug',
+          'Gbaug',
+          'Baug',
+          'Eaug',
+          'Aaug',
+          'Daug',
+          'Gaug'
+        ]);
       }
       augButtonEnabled = !augButtonEnabled;
     });
@@ -90,7 +119,20 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('Cdim'))) {
         chords.removeWhere((element) => element.contains('Cdim'));
       } else {
-        chords.add(['Cdim', 'Fdim', 'Bbdim', 'Ebdim', 'Abdim', 'Dbdim', 'Gbdim', 'Bdim', 'Edim', 'Adim', 'Ddim', 'Gdim']);
+        chords.add([
+          'Cdim',
+          'Fdim',
+          'Bbdim',
+          'Ebdim',
+          'Abdim',
+          'Dbdim',
+          'Gbdim',
+          'Bdim',
+          'Edim',
+          'Adim',
+          'Ddim',
+          'Gdim'
+        ]);
       }
       dimButtonEnabled = !dimButtonEnabled;
     });
@@ -101,7 +143,20 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('C2'))) {
         chords.removeWhere((element) => element.contains('C2'));
       } else {
-        chords.add(['C2', 'F2', 'Bb2', 'Eb2', 'Ab2', 'Db2', 'Gb2', 'B2', 'E2', 'A2', 'D2', 'G2']);
+        chords.add([
+          'C2',
+          'F2',
+          'Bb2',
+          'Eb2',
+          'Ab2',
+          'Db2',
+          'Gb2',
+          'B2',
+          'E2',
+          'A2',
+          'D2',
+          'G2'
+        ]);
       }
       twoButtonEnabled = !twoButtonEnabled;
     });
@@ -112,7 +167,20 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('Csus4'))) {
         chords.removeWhere((element) => element.contains('Csus4'));
       } else {
-        chords.add(['Csus4', 'Fsus4', 'Bbsus4', 'Ebsus4', 'Absus4', 'Dbsus4', 'Gbsus4', 'Bsus4', 'Esus4', 'Asus4', 'Dsus4', 'Gsus4']);
+        chords.add([
+          'Csus4',
+          'Fsus4',
+          'Bbsus4',
+          'Ebsus4',
+          'Absus4',
+          'Dbsus4',
+          'Gbsus4',
+          'Bsus4',
+          'Esus4',
+          'Asus4',
+          'Dsus4',
+          'Gsus4'
+        ]);
       }
       sus4ButtonEnabled = !sus4ButtonEnabled;
     });
@@ -123,7 +191,20 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('CM7'))) {
         chords.removeWhere((element) => element.contains('CM7'));
       } else {
-        chords.add(['CM7', 'FM7', 'BbM7', 'EbM7', 'AbM7', 'DbM7', 'GbM7', 'BM7', 'EM7', 'AM7', 'DM7', 'GM7']);
+        chords.add([
+          'CM7',
+          'FM7',
+          'BbM7',
+          'EbM7',
+          'AbM7',
+          'DbM7',
+          'GbM7',
+          'BM7',
+          'EM7',
+          'AM7',
+          'DM7',
+          'GM7'
+        ]);
       }
       M7ButtonEnabled = !M7ButtonEnabled;
     });
@@ -134,7 +215,20 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('Cm7'))) {
         chords.removeWhere((element) => element.contains('Cm7'));
       } else {
-        chords.add(['Cm7', 'Fm7', 'Bbm7', 'Ebm7', 'Abm7', 'Dbm7', 'Gbm7', 'Bm7', 'Em7', 'Am7', 'Dm7', 'Gm7']);
+        chords.add([
+          'Cm7',
+          'Fm7',
+          'Bbm7',
+          'Ebm7',
+          'Abm7',
+          'Dbm7',
+          'Gbm7',
+          'Bm7',
+          'Em7',
+          'Am7',
+          'Dm7',
+          'Gm7'
+        ]);
       }
       m7ButtonEnabled = !m7ButtonEnabled;
     });
@@ -145,7 +239,20 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('C7'))) {
         chords.removeWhere((element) => element.contains('C7'));
       } else {
-        chords.add(['C7', 'F7', 'Bb7', 'Eb7', 'Ab7', 'Db7', 'Gb7', 'B7', 'E7', 'A7', 'D7', 'G7']);
+        chords.add([
+          'C7',
+          'F7',
+          'Bb7',
+          'Eb7',
+          'Ab7',
+          'Db7',
+          'Gb7',
+          'B7',
+          'E7',
+          'A7',
+          'D7',
+          'G7'
+        ]);
       }
       sevenButtonEnabled = !sevenButtonEnabled;
     });
@@ -156,7 +263,20 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('CmM7'))) {
         chords.removeWhere((element) => element.contains('CmM7'));
       } else {
-        chords.add(['CmM7', 'FmM7', 'BbmM7', 'EbmM7', 'AbmM7', 'DbmM7', 'GbmM7', 'BmM7', 'EmM7', 'AmM7', 'DmM7', 'GmM7']);
+        chords.add([
+          'CmM7',
+          'FmM7',
+          'BbmM7',
+          'EbmM7',
+          'AbmM7',
+          'DbmM7',
+          'GbmM7',
+          'BmM7',
+          'EmM7',
+          'AmM7',
+          'DmM7',
+          'GmM7'
+        ]);
       }
       mM7ButtonEnabled = !mM7ButtonEnabled;
     });
@@ -165,20 +285,22 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
 
   void generateRandomChord() {
     setState(() {
-      int randomIndex = Random().nextInt(chords.length);
-      int randomChordIndex = Random().nextInt(chords[randomIndex].length);
-      currentChord = chords[randomIndex][randomChordIndex];
+      if(chords.length>0){
+        int randomIndex = Random().nextInt(chords.length);
+        int randomChordIndex = Random().nextInt(chords[randomIndex].length);
+        currentChord = chords[randomIndex][randomChordIndex];
+      }
     });
   }
 
   Timer? _timer;
-
+  int gTime = 4;
   void toggleRandomChordGenerator() {
     if (_timer != null) {
       _timer!.cancel(); // 타이머가 이미 실행 중인 경우 중지합니다.
       _timer = null;
     } else {
-      _timer = Timer.periodic(Duration(seconds: 2), (timer) {
+      _timer = Timer.periodic(Duration(seconds: gTime), (timer) {
         generateRandomChord();
       });
     }
@@ -313,6 +435,42 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
             onPressed : (){toggleRandomChordGenerator(); onPressedCallback();},
             child: Text(GbuttonText),
           ),
+          Row(
+            children: [
+              Text(
+                gTime.toString(),
+                style: TextStyle(fontSize: 20),
+              ),
+              SizedBox(width: 100),
+            ]
+          ),
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  if(gTime>=2){
+                    setState(() {
+                      toggleRandomChordGenerator();
+                      onPressedCallback();
+                      gTime--;
+                    });
+                  }
+                  },
+              child: Text('-1'),
+            ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    toggleRandomChordGenerator();
+                    onPressedCallback();
+                    gTime++;
+                  });
+                },
+                child: Text('+1'),
+              ),
+            ]
+          )
+
         ],
       ),
     );
