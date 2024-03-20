@@ -310,10 +310,10 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
   void onPressedCallback() {
     setState(() {
       // 현재 버튼 텍스트 확인 후 변경
-      if (GbuttonText == 'Start') {
-        GbuttonText = 'Stop';
-      } else {
+      if (GbuttonText == 'Stop') {
         GbuttonText = 'Start';
+      } else {
+        GbuttonText = 'Stop';
       }
     });
   }
@@ -327,146 +327,221 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       body: Column(
         children: [
           SizedBox(height: 20),
+          Container( height:1.0,
+            width:500.0,
+            color:Colors.transparent,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
                 onPressed: toggleMajorButton,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: majorButtonEnabled ? Colors.black : Colors
-                      .grey,
+                  shape: RoundedRectangleBorder(),
+                  minimumSize: Size(90, 45),
+                  maximumSize: Size(90, 45),
+                  backgroundColor: majorButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
                 ),
-                child: Text(majorButtonEnabled ? 'Major' : 'Major'),
+                child: Text(majorButtonEnabled ? 'Major' : 'Major', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
               ),
+              Container( height:60.0,
+                width:1.0,
+                color:Colors.transparent,),
               ElevatedButton(
                 onPressed: toggleMinorButton,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: minorButtonEnabled ? Colors.black : Colors
-                      .grey,
+                  shape: RoundedRectangleBorder(),
+                  minimumSize: Size(90, 45),
+                  maximumSize: Size(90, 45),
+                  backgroundColor: minorButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
                 ),
-                child: Text(minorButtonEnabled ? 'Minor' : 'Minor'),
-              ),
-              ElevatedButton(
-                onPressed: toggleAugButton,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: augButtonEnabled ? Colors.black : Colors.grey,
-                ),
-                child: Text(augButtonEnabled ? 'Aug' : 'Aug'),
+                child: Text(minorButtonEnabled ? 'Minor' : 'Minor', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
               ),
             ],
           ),
-          SizedBox(height: 10),
+          Container( height:1.0,
+            width:500.0,
+            color:Colors.transparent,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
+              onPressed: toggleAugButton,
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(),
+                  minimumSize: Size(90, 45),
+                  maximumSize: Size(90, 45),
+                  backgroundColor: augButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
+                  //side:BorderSide(color: Colors.black),
+                ),
+              child: Text(augButtonEnabled ? 'Aug' : 'Aug', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
+              ),
+              Container( height:60.0,
+                width:1.0,
+                color:Colors.transparent,),
+              ElevatedButton(
                 onPressed: toggleDimButton,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: dimButtonEnabled ? Colors.black : Colors.grey,
+                  shape: RoundedRectangleBorder(),
+                  minimumSize: Size(90, 45),
+                  maximumSize: Size(90, 45),
+                  backgroundColor: dimButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
+                  //side:BorderSide(color: Colors.black),
                 ),
-                child: Text(dimButtonEnabled ? 'Dim' : 'Dim'),
+                child: Text(dimButtonEnabled ? 'Dim' : 'Dim', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
               ),
+              Container( height:60.0,
+                width:1.0,
+                color:Colors.transparent,),
               ElevatedButton(
                 onPressed: toggle2Button,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: twoButtonEnabled ? Colors.black : Colors.grey,
+                  shape: RoundedRectangleBorder(),
+                  minimumSize: Size(90, 45),
+                  maximumSize: Size(90, 45),
+                  backgroundColor: twoButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
+                  //side:BorderSide(color: Colors.black),
                 ),
-                child: Text(twoButtonEnabled ? '2' : '2'),
+                child: Text(twoButtonEnabled ? '2' : '2', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
               ),
+              Container( height:60.0,
+                width:1.0,
+                color:Colors.transparent,),
               ElevatedButton(
                 onPressed: toggleSus4Button,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: sus4ButtonEnabled ? Colors.black : Colors
-                      .grey,
+                  shape: RoundedRectangleBorder(),
+                  minimumSize: Size(90, 45),
+                  maximumSize: Size(90, 45),
+                  backgroundColor: sus4ButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
+                  //side:BorderSide(color: Colors.black),
                 ),
-                child: Text(sus4ButtonEnabled ? 'Sus4' : 'Sus4'),
+                child: Text(sus4ButtonEnabled ? 'Sus4' : 'Sus4', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
               ),
             ],
           ),
-          SizedBox(height: 10),
+          Container( height:1.0,
+            width:500.0,
+            color:Colors.transparent,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
                 onPressed: toggleM7Button,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: M7ButtonEnabled ? Colors.black : Colors.grey,
+                  shape: RoundedRectangleBorder(),
+                  minimumSize: Size(90, 45),
+                  maximumSize: Size(90, 45),
+                  backgroundColor: M7ButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
+                  //side:BorderSide(color: Colors.black),
                 ),
-                child: Text(M7ButtonEnabled ? 'M7' : 'M7'),
+                child: Text(M7ButtonEnabled ? 'M7' : 'M7', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
               ),
+              Container( height:60.0,
+                width:1.0,
+                color:Colors.transparent,),
               ElevatedButton(
                 onPressed: togglem7Button,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: m7ButtonEnabled ? Colors.black : Colors.grey,
+                  shape: RoundedRectangleBorder(),
+                  minimumSize: Size(90, 45),
+                  maximumSize: Size(90, 45),
+                  backgroundColor: m7ButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
+                  //side:BorderSide(color: Colors.black),
                 ),
-                child: Text(m7ButtonEnabled ? 'm7' : 'm7'),
+                child: Text(m7ButtonEnabled ? 'm7' : 'm7', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
               ),
+              Container( height:60.0,
+                width:1.0,
+                color:Colors.transparent,),
               ElevatedButton(
                 onPressed: toggle7Button,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: sevenButtonEnabled ? Colors.black : Colors
-                      .grey,
+                  shape: RoundedRectangleBorder(),
+                  minimumSize: Size(90, 45),
+                  maximumSize: Size(90, 45),
+                  backgroundColor: sevenButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
+                  //side:BorderSide(color: Colors.black),
                 ),
-                child: Text(sevenButtonEnabled ? '7' : '7'),
+                child: Text(sevenButtonEnabled ? '7' : '7', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
               ),
-            ],
-          ),
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
+              Container( height:60.0,
+                width:1.0,
+                color:Colors.transparent,),
               ElevatedButton(
-                onPressed: togglemM7Button,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: mM7ButtonEnabled ? Colors.black : Colors.grey,
-                ),
-                child: Text(mM7ButtonEnabled ? 'mM7' : 'mM7'),
+              onPressed: togglemM7Button,
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(),
+                    minimumSize: Size(90, 45),
+                    maximumSize: Size(90, 45),
+                    backgroundColor: mM7ButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
+                    //side:BorderSide(color: Colors.black),
+                  ),
+              child: Text(mM7ButtonEnabled ? 'mM7' : 'mM7', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
               ),
             ],
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 60),
           Text(
             currentChord,
             style: TextStyle(fontSize: 80),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 200),
+          SizedBox(height: 150),
           ElevatedButton(
             onPressed : (){toggleRandomChordGenerator(); onPressedCallback();},
-            child: Text(GbuttonText),
+            child: Text(
+                GbuttonText,
+                style: TextStyle(fontSize: 20, color: Colors.black),
+            ),
+            style: ElevatedButton.styleFrom(backgroundColor: (GbuttonText == 'Stop') ? Color(0xff9BB8D5) : Color(0xffE1DCEA)),
           ),
+          SizedBox(height: 50),
           Row(
-            children: [
-              Text(
-                gTime.toString(),
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(width: 100),
-            ]
-          ),
-          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
                 onPressed: () {
                   if(gTime>=2){
                     setState(() {
-                      toggleRandomChordGenerator();
-                      onPressedCallback();
+                      if (_timer != null) {
+                        _timer!.cancel(); // 타이머가 이미 실행 중인 경우 중지합니다.
+                        _timer = null;
+                      }
+                      GbuttonText = 'Start';
                       gTime--;
                     });
                   }
                   },
-              child: Text('-1'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xffE1DCEA),
+                ),
+                child: Text(
+                    '-1',
+                    style: TextStyle(fontSize: 20, color: Colors.black)
+                ),
             ),
+              Text(
+                gTime.toString(),
+                style: TextStyle(fontSize: 50),
+              ),
               ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    toggleRandomChordGenerator();
-                    onPressedCallback();
+                    if (_timer != null) {
+                      _timer!.cancel(); // 타이머가 이미 실행 중인 경우 중지합니다.
+                      _timer = null;
+                    }
+                    GbuttonText = 'Start';
                     gTime++;
                   });
                 },
-                child: Text('+1'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xffE1DCEA),
+                ),
+                child: Text(
+                    '+1',
+                    style: TextStyle(fontSize: 20, color: Colors.black)
+                ),
               ),
             ]
           )
