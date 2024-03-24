@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
@@ -27,6 +28,7 @@ class RandomChordScreen extends StatefulWidget {
 
 class _RandomChordScreenState extends State<RandomChordScreen> {
   String currentChord = '';
+  String previousChord = '';
 
   List<List<String>> chords = [
     ['C', 'F', 'Bb', 'Eb', 'Ab', 'Db', 'Gb', 'B', 'E', 'A', 'D', 'G'],
@@ -71,20 +73,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('Cm'))) {
         chords.removeWhere((element) => element.contains('Cm'));
       } else {
-        chords.add([
-          'Cm',
-          'Fm',
-          'Bbm',
-          'Ebm',
-          'Abm',
-          'Dbm',
-          'Gbm',
-          'Bm',
-          'Em',
-          'Am',
-          'Dm',
-          'Gm'
-        ]);
+        chords.add(['Cm', 'Fm', 'Bbm', 'Ebm', 'Abm', 'Dbm', 'Gbm', 'Bm', 'Em', 'Am', 'Dm', 'Gm']);
       }
       minorButtonEnabled = !minorButtonEnabled;
     });
@@ -95,20 +84,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('Caug'))) {
         chords.removeWhere((element) => element.contains('Caug'));
       } else {
-        chords.add([
-          'Caug',
-          'Faug',
-          'Bbaug',
-          'Ebaug',
-          'Abaug',
-          'Dbaug',
-          'Gbaug',
-          'Baug',
-          'Eaug',
-          'Aaug',
-          'Daug',
-          'Gaug'
-        ]);
+        chords.add(['Caug', 'Faug', 'Bbaug', 'Ebaug', 'Abaug', 'Dbaug', 'Gbaug', 'Baug', 'Eaug', 'Aaug', 'Daug', 'Gaug']);
       }
       augButtonEnabled = !augButtonEnabled;
     });
@@ -119,20 +95,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('Cdim'))) {
         chords.removeWhere((element) => element.contains('Cdim'));
       } else {
-        chords.add([
-          'Cdim',
-          'Fdim',
-          'Bbdim',
-          'Ebdim',
-          'Abdim',
-          'Dbdim',
-          'Gbdim',
-          'Bdim',
-          'Edim',
-          'Adim',
-          'Ddim',
-          'Gdim'
-        ]);
+        chords.add(['Cdim', 'Fdim', 'Bbdim', 'Ebdim', 'Abdim', 'Dbdim', 'Gbdim', 'Bdim', 'Edim', 'Adim', 'Ddim', 'Gdim']);
       }
       dimButtonEnabled = !dimButtonEnabled;
     });
@@ -143,20 +106,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('C2'))) {
         chords.removeWhere((element) => element.contains('C2'));
       } else {
-        chords.add([
-          'C2',
-          'F2',
-          'Bb2',
-          'Eb2',
-          'Ab2',
-          'Db2',
-          'Gb2',
-          'B2',
-          'E2',
-          'A2',
-          'D2',
-          'G2'
-        ]);
+        chords.add(['C2', 'F2', 'Bb2', 'Eb2', 'Ab2', 'Db2', 'Gb2', 'B2', 'E2', 'A2', 'D2', 'G2']);
       }
       twoButtonEnabled = !twoButtonEnabled;
     });
@@ -167,20 +117,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('Csus4'))) {
         chords.removeWhere((element) => element.contains('Csus4'));
       } else {
-        chords.add([
-          'Csus4',
-          'Fsus4',
-          'Bbsus4',
-          'Ebsus4',
-          'Absus4',
-          'Dbsus4',
-          'Gbsus4',
-          'Bsus4',
-          'Esus4',
-          'Asus4',
-          'Dsus4',
-          'Gsus4'
-        ]);
+        chords.add(['Csus4', 'Fsus4', 'Bbsus4', 'Ebsus4', 'Absus4', 'Dbsus4', 'Gbsus4', 'Bsus4', 'Esus4', 'Asus4', 'Dsus4', 'Gsus4']);
       }
       sus4ButtonEnabled = !sus4ButtonEnabled;
     });
@@ -191,20 +128,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('CM7'))) {
         chords.removeWhere((element) => element.contains('CM7'));
       } else {
-        chords.add([
-          'CM7',
-          'FM7',
-          'BbM7',
-          'EbM7',
-          'AbM7',
-          'DbM7',
-          'GbM7',
-          'BM7',
-          'EM7',
-          'AM7',
-          'DM7',
-          'GM7'
-        ]);
+        chords.add(['CM7', 'FM7', 'BbM7', 'EbM7', 'AbM7', 'DbM7', 'GbM7', 'BM7', 'EM7', 'AM7', 'DM7', 'GM7']);
       }
       M7ButtonEnabled = !M7ButtonEnabled;
     });
@@ -215,20 +139,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('Cm7'))) {
         chords.removeWhere((element) => element.contains('Cm7'));
       } else {
-        chords.add([
-          'Cm7',
-          'Fm7',
-          'Bbm7',
-          'Ebm7',
-          'Abm7',
-          'Dbm7',
-          'Gbm7',
-          'Bm7',
-          'Em7',
-          'Am7',
-          'Dm7',
-          'Gm7'
-        ]);
+        chords.add(['Cm7', 'Fm7', 'Bbm7', 'Ebm7', 'Abm7', 'Dbm7', 'Gbm7', 'Bm7', 'Em7', 'Am7', 'Dm7', 'Gm7']);
       }
       m7ButtonEnabled = !m7ButtonEnabled;
     });
@@ -239,20 +150,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('C7'))) {
         chords.removeWhere((element) => element.contains('C7'));
       } else {
-        chords.add([
-          'C7',
-          'F7',
-          'Bb7',
-          'Eb7',
-          'Ab7',
-          'Db7',
-          'Gb7',
-          'B7',
-          'E7',
-          'A7',
-          'D7',
-          'G7'
-        ]);
+        chords.add(['C7', 'F7', 'Bb7', 'Eb7', 'Ab7', 'Db7', 'Gb7', 'B7', 'E7', 'A7', 'D7', 'G7']);
       }
       sevenButtonEnabled = !sevenButtonEnabled;
     });
@@ -263,20 +161,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       if (chords.any((element) => element.contains('CmM7'))) {
         chords.removeWhere((element) => element.contains('CmM7'));
       } else {
-        chords.add([
-          'CmM7',
-          'FmM7',
-          'BbmM7',
-          'EbmM7',
-          'AbmM7',
-          'DbmM7',
-          'GbmM7',
-          'BmM7',
-          'EmM7',
-          'AmM7',
-          'DmM7',
-          'GmM7'
-        ]);
+        chords.add(['CmM7', 'FmM7', 'BbmM7', 'EbmM7', 'AbmM7', 'DbmM7', 'GbmM7', 'BmM7', 'EmM7', 'AmM7', 'DmM7', 'GmM7']);
       }
       mM7ButtonEnabled = !mM7ButtonEnabled;
     });
@@ -285,14 +170,21 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
 
   void generateRandomChord() {
     setState(() {
-      if(chords.length>0){
+      if(chords.isNotEmpty){
         int randomIndex = Random().nextInt(chords.length);
         int randomChordIndex = Random().nextInt(chords[randomIndex].length);
         currentChord = chords[randomIndex][randomChordIndex];
+
+        //중복제거
+        while(previousChord == currentChord){
+          generateRandomChord();
+        }
       }
     });
   }
 
+  int inversion = 0;  //전위 담당 변수
+  bool showInversion = true;
   Timer? _timer;
   int gTime = 4;
   void toggleRandomChordGenerator() {
@@ -301,6 +193,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       _timer = null;
     } else {
       _timer = Timer.periodic(Duration(seconds: gTime), (timer) {
+        previousChord = currentChord;
         generateRandomChord();
       });
     }
@@ -317,6 +210,8 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       }
     });
   }
+
+  //메인 부분
   @override
   Widget build(BuildContext context) {
     generateRandomChord();
@@ -330,6 +225,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
           Container( height:1.0,
             width:500.0,
             color:Colors.transparent,),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -341,7 +237,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
                   maximumSize: Size(90, 45),
                   backgroundColor: majorButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
                 ),
-                child: Text(majorButtonEnabled ? 'Major' : 'Major', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
+                child: Text('Major', style: TextStyle(color: Colors.white)),
               ),
               Container( height:60.0,
                 width:1.0,
@@ -354,7 +250,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
                   maximumSize: Size(90, 45),
                   backgroundColor: minorButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
                 ),
-                child: Text(minorButtonEnabled ? 'Minor' : 'Minor', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
+                child: Text('Minor', style: TextStyle(color: Colors.white)),
               ),
             ],
           ),
@@ -373,7 +269,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
                   backgroundColor: augButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
                   //side:BorderSide(color: Colors.black),
                 ),
-              child: Text(augButtonEnabled ? 'Aug' : 'Aug', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
+                child: Text('Aug', style: TextStyle(color: Colors.white)),
               ),
               Container( height:60.0,
                 width:1.0,
@@ -387,7 +283,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
                   backgroundColor: dimButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
                   //side:BorderSide(color: Colors.black),
                 ),
-                child: Text(dimButtonEnabled ? 'Dim' : 'Dim', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
+                child: Text('Dim', style: TextStyle(color: Colors.white)),
               ),
               Container( height:60.0,
                 width:1.0,
@@ -401,7 +297,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
                   backgroundColor: twoButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
                   //side:BorderSide(color: Colors.black),
                 ),
-                child: Text(twoButtonEnabled ? '2' : '2', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
+                child: Text('2', style: TextStyle(color: Colors.white)),
               ),
               Container( height:60.0,
                 width:1.0,
@@ -415,7 +311,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
                   backgroundColor: sus4ButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
                   //side:BorderSide(color: Colors.black),
                 ),
-                child: Text(sus4ButtonEnabled ? 'Sus4' : 'Sus4', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
+                child: Text('Sus4', style: TextStyle(color: Colors.white)),
               ),
             ],
           ),
@@ -434,7 +330,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
                   backgroundColor: M7ButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
                   //side:BorderSide(color: Colors.black),
                 ),
-                child: Text(M7ButtonEnabled ? 'M7' : 'M7', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
+                child: Text('M7', style: TextStyle(color: Colors.white)),
               ),
               Container( height:60.0,
                 width:1.0,
@@ -448,7 +344,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
                   backgroundColor: m7ButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
                   //side:BorderSide(color: Colors.black),
                 ),
-                child: Text(m7ButtonEnabled ? 'm7' : 'm7', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
+                child: Text('m7', style: TextStyle(color: Colors.white)),
               ),
               Container( height:60.0,
                 width:1.0,
@@ -462,7 +358,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
                   backgroundColor: sevenButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
                   //side:BorderSide(color: Colors.black),
                 ),
-                child: Text(sevenButtonEnabled ? '7' : '7', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
+                child: Text('7', style: TextStyle(color: Colors.white)),
               ),
               Container( height:60.0,
                 width:1.0,
@@ -476,19 +372,35 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
                     backgroundColor: mM7ButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
                     //side:BorderSide(color: Colors.black),
                   ),
-              child: Text(mM7ButtonEnabled ? 'mM7' : 'mM7', style: TextStyle(color: majorButtonEnabled ? Colors.white : Colors.white)),
+                child: Text('mM7', style: TextStyle(color: Colors.white)),
               ),
             ],
           ),
-          SizedBox(height: 60),
+          SizedBox(height:40),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                previousChord,
+                style: TextStyle(fontSize: 40, color: Colors.black.withOpacity(0.8)),
+                ),
+              SizedBox(width: 120)
+            ],
+          ),
+          //SizedBox(height: 10),
           Text(
             currentChord,
             style: TextStyle(fontSize: 80),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 150),
+
+          SizedBox(height: 80),
           ElevatedButton(
-            onPressed : (){toggleRandomChordGenerator(); onPressedCallback();},
+            onPressed : (){
+              previousChord = '';
+              currentChord = '';
+              toggleRandomChordGenerator(); onPressedCallback();
+            },
             child: Text(
                 GbuttonText,
                 style: TextStyle(fontSize: 20, color: Colors.black),
@@ -499,6 +411,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              //-1 버튼
               ElevatedButton(
                 onPressed: () {
                   if(gTime>=2){
@@ -520,10 +433,12 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
                     style: TextStyle(fontSize: 20, color: Colors.black)
                 ),
             ),
+              //시간 표시 부분
               Text(
                 gTime.toString(),
                 style: TextStyle(fontSize: 50),
               ),
+              //+1 버튼
               ElevatedButton(
                 onPressed: () {
                   setState(() {
