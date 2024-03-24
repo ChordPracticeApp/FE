@@ -54,8 +54,6 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
   bool sevenButtonEnabled = true;
   bool mM7ButtonEnabled = true;
 
-
-
   void toggleMajorButton() {
     setState(() {
       if (chords.any((element) => element.contains('C'))) {
@@ -67,7 +65,6 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       majorButtonEnabled = !majorButtonEnabled;
     });
   }
-
   void toggleMinorButton() {
     setState(() {
       if (chords.any((element) => element.contains('Cm'))) {
@@ -78,7 +75,6 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       minorButtonEnabled = !minorButtonEnabled;
     });
   }
-
   void toggleAugButton() {
     setState(() {
       if (chords.any((element) => element.contains('Caug'))) {
@@ -89,7 +85,6 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       augButtonEnabled = !augButtonEnabled;
     });
   }
-
   void toggleDimButton() {
     setState(() {
       if (chords.any((element) => element.contains('Cdim'))) {
@@ -100,7 +95,6 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       dimButtonEnabled = !dimButtonEnabled;
     });
   }
-
   void toggle2Button() {
     setState(() {
       if (chords.any((element) => element.contains('C2'))) {
@@ -111,7 +105,6 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       twoButtonEnabled = !twoButtonEnabled;
     });
   }
-
   void toggleSus4Button() {
     setState(() {
       if (chords.any((element) => element.contains('Csus4'))) {
@@ -122,7 +115,6 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       sus4ButtonEnabled = !sus4ButtonEnabled;
     });
   }
-
   void toggleM7Button() {
     setState(() {
       if (chords.any((element) => element.contains('CM7'))) {
@@ -133,7 +125,6 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       M7ButtonEnabled = !M7ButtonEnabled;
     });
   }
-
   void togglem7Button() {
     setState(() {
       if (chords.any((element) => element.contains('Cm7'))) {
@@ -144,7 +135,6 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       m7ButtonEnabled = !m7ButtonEnabled;
     });
   }
-
   void toggle7Button() {
     setState(() {
       if (chords.any((element) => element.contains('C7'))) {
@@ -155,7 +145,6 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       sevenButtonEnabled = !sevenButtonEnabled;
     });
   }
-
   void togglemM7Button() {
     setState(() {
       if (chords.any((element) => element.contains('CmM7'))) {
@@ -167,6 +156,8 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
     });
   }
 
+  String inversion = '1';  //전위 담당 변수
+  bool InversionEnabled = true;
 
   void generateRandomChord() {
     setState(() {
@@ -183,8 +174,26 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
     });
   }
 
-  int inversion = 0;  //전위 담당 변수
-  bool showInversion = true;
+  void toggleInversionEnabledButton() {
+    InversionEnabled = !InversionEnabled;
+  }
+
+  void generateRamdomInversion4(){
+    if(InversionEnabled == true){
+      inversion = (Random().nextInt(4) + 1).toString();
+    } else{
+      inversion = '';
+    }
+  }
+
+  void generateRamdomInversion3(){
+    if(InversionEnabled == true){
+      inversion = (Random().nextInt(3) + 1).toString();
+    } else {
+      inversion = '';
+    }
+  }
+
   Timer? _timer;
   int gTime = 4;
   void toggleRandomChordGenerator() {
@@ -195,6 +204,11 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       _timer = Timer.periodic(Duration(seconds: gTime), (timer) {
         previousChord = currentChord;
         generateRandomChord();
+        if(currentChord.contains('7')){
+          generateRamdomInversion4();
+        } else{
+          generateRamdomInversion3();
+        }
       });
     }
   }
@@ -261,7 +275,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
-              onPressed: toggleAugButton,
+                onPressed: toggleAugButton,
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(),
                   minimumSize: Size(90, 45),
@@ -364,14 +378,14 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
                 width:1.0,
                 color:Colors.transparent,),
               ElevatedButton(
-              onPressed: togglemM7Button,
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(),
-                    minimumSize: Size(90, 45),
-                    maximumSize: Size(90, 45),
-                    backgroundColor: mM7ButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
-                    //side:BorderSide(color: Colors.black),
-                  ),
+                onPressed: togglemM7Button,
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(),
+                  minimumSize: Size(90, 45),
+                  maximumSize: Size(90, 45),
+                  backgroundColor: mM7ButtonEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
+                  //side:BorderSide(color: Colors.black),
+                ),
                 child: Text('mM7', style: TextStyle(color: Colors.white)),
               ),
             ],
@@ -383,7 +397,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
               Text(
                 previousChord,
                 style: TextStyle(fontSize: 40, color: Colors.black.withOpacity(0.8)),
-                ),
+              ),
               SizedBox(width: 120)
             ],
           ),
@@ -394,6 +408,11 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
             textAlign: TextAlign.center,
           ),
 
+          //전위 숫자
+          Text(
+            inversion,
+            style: TextStyle(fontSize: 40),
+          ),
           SizedBox(height: 80),
           ElevatedButton(
             onPressed : (){
@@ -402,65 +421,77 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
               toggleRandomChordGenerator(); onPressedCallback();
             },
             child: Text(
-                GbuttonText,
-                style: TextStyle(fontSize: 20, color: Colors.black),
+              GbuttonText,
+              style: TextStyle(fontSize: 20, color: Colors.black),
             ),
             style: ElevatedButton.styleFrom(backgroundColor: (GbuttonText == 'Stop') ? Color(0xff9BB8D5) : Color(0xffE1DCEA)),
           ),
           SizedBox(height: 50),
+
+          //-1, 전환 시간, +1
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              //-1 버튼
-              ElevatedButton(
-                onPressed: () {
-                  if(gTime>=2){
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                //-1 버튼
+                ElevatedButton(
+                  onPressed: () {
+                    if(gTime>=2){
+                      setState(() {
+                        if (_timer != null) {
+                          _timer!.cancel(); // 타이머가 이미 실행 중인 경우 중지합니다.
+                          _timer = null;
+                        }
+                        GbuttonText = 'Start';
+                        gTime--;
+                      });
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xffE1DCEA),
+                  ),
+                  child: Text(
+                      '-1',
+                      style: TextStyle(fontSize: 20, color: Colors.black)
+                  ),
+                ),
+                //전환 시간
+                Text(
+                  gTime.toString(),
+                  style: TextStyle(fontSize: 50),
+                ),
+                //+1 버튼
+                ElevatedButton(
+                  onPressed: () {
                     setState(() {
                       if (_timer != null) {
                         _timer!.cancel(); // 타이머가 이미 실행 중인 경우 중지합니다.
                         _timer = null;
                       }
                       GbuttonText = 'Start';
-                      gTime--;
+                      gTime++;
                     });
-                  }
                   },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xffE1DCEA),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xffE1DCEA),
+                  ),
+                  child: Text(
+                      '+1',
+                      style: TextStyle(fontSize: 20, color: Colors.black)
+                  ),
                 ),
-                child: Text(
-                    '-1',
-                    style: TextStyle(fontSize: 20, color: Colors.black)
-                ),
-            ),
-              //시간 표시 부분
-              Text(
-                gTime.toString(),
-                style: TextStyle(fontSize: 50),
-              ),
-              //+1 버튼
+              ]
+          ),
+          Row(
+            children: [
               ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    if (_timer != null) {
-                      _timer!.cancel(); // 타이머가 이미 실행 중인 경우 중지합니다.
-                      _timer = null;
-                    }
-                    GbuttonText = 'Start';
-                    gTime++;
-                  });
-                },
+                onPressed: toggleInversionEnabledButton,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xffE1DCEA),
+                  backgroundColor: InversionEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
                 ),
-                child: Text(
-                    '+1',
-                    style: TextStyle(fontSize: 20, color: Colors.black)
-                ),
+                child: Text('Inversion', style: TextStyle(color: Colors.white)),
               ),
-            ]
+            ],
           )
-
         ],
       ),
     );
