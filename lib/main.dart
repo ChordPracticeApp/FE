@@ -158,6 +158,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
 
   String inversion = '1';  //전위 담당 변수
   bool InversionEnabled = true;
+  bool previousChordEnabled = true;
 
   void generateRandomChord() {
     setState(() {
@@ -176,6 +177,10 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
 
   void toggleInversionEnabledButton() {
     InversionEnabled = !InversionEnabled;
+  }
+
+  void togglePreviousChordEnabledButton(){
+    previousChordEnabled = !previousChordEnabled;
   }
 
   void generateRamdomInversion4(){
@@ -202,7 +207,11 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       _timer = null;
     } else {
       _timer = Timer.periodic(Duration(seconds: gTime), (timer) {
-        previousChord = currentChord;
+        if(previousChordEnabled == true){
+          previousChord = currentChord;
+        } else{
+          previousChord = '';
+        }
         generateRandomChord();
         if(currentChord.contains('7')){
           generateRamdomInversion4();
@@ -481,7 +490,10 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
                 ),
               ]
           ),
+
+          //전위 on/off 버튼
           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               ElevatedButton(
                 onPressed: toggleInversionEnabledButton,
@@ -489,6 +501,13 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
                   backgroundColor: InversionEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
                 ),
                 child: Text('Inversion', style: TextStyle(color: Colors.white)),
+              ),
+              ElevatedButton(
+                onPressed: togglePreviousChordEnabledButton,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: previousChordEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
+                ),
+                child: Text('pre-chord', style: TextStyle(color: Colors.white)),
               ),
             ],
           )
