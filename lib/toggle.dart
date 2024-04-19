@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class ToggleButtonsWidget extends StatefulWidget {
   final List<List<String>> chords;
+  dynamic inversionEnabled;
+  dynamic previousChordEnabled;
 
-  const ToggleButtonsWidget({Key? key, required this.chords}) : super(key: key);
+  const ToggleButtonsWidget({Key? key, required this.chords, required this.inversionEnabled, required this.previousChordEnabled}) : super(key: key);
 
   @override
   _ToggleButtonsWidgetState createState() => _ToggleButtonsWidgetState();
@@ -130,8 +132,39 @@ class _ToggleButtonsWidgetState extends State<ToggleButtonsWidget> {
                 ),
               ]
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: () => toggleInversionEnabledButton(),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0),),
+                  fixedSize: Size(90, 45),
+                  backgroundColor: widget.inversionEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
+                ),
+                child: Text('Inversion', style: TextStyle(color: Colors.white)),
+              ),
+              ElevatedButton(
+                onPressed: () => togglePreviousChordEnabledButton(),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0),),
+                  fixedSize: Size(90, 45),
+                  backgroundColor: widget.previousChordEnabled ? Color(0xff9CC4AB) : Color(0xffCCE4C3),
+                ),
+                child: Text('Pre-Chord', style: TextStyle(color: Colors.white)),
+              ),
+            ],
+          )
         ]
     );
+  }
+
+  void toggleInversionEnabledButton() {
+    widget.inversionEnabled = !widget.inversionEnabled;
+  }
+
+  void togglePreviousChordEnabledButton() {
+    widget.previousChordEnabled = !widget.previousChordEnabled;
   }
 
   void toggleMajorButton(List<List<String>> chords) {
@@ -144,7 +177,6 @@ class _ToggleButtonsWidgetState extends State<ToggleButtonsWidget> {
     setState(() {
       majorButtonEnabled = !majorButtonEnabled;
     });
-
   }
   void toggleMinorButton(List<List<String>> chords) {
     if (chords.any((element) => element.contains('Cm'))) {

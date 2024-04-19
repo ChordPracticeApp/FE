@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:async';
 import 'buttonStyle.dart';
-import 'timer_buttons.dart';
+import 'timerButtons.dart';
 import 'printChord.dart';
+import 'timerButtons.dart';
 
 void main() {
   runApp(MyApp());
@@ -41,23 +42,9 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
     ['C7', 'F7', 'Bb7', 'Eb7', 'Ab7', 'Db7', 'Gb7', 'B7', 'E7', 'A7', 'D7', 'G7'],
     ['CmM7', 'FmM7', 'BbmM7', 'EbmM7', 'AbmM7', 'DbmM7', 'GbmM7', 'BmM7', 'EmM7', 'AmM7', 'DmM7', 'GmM7'],
   ];
+  bool inversionEnabled = true;
+  bool previousChordEnabled = true;
 
-  Timer? _timer;
-  int gTime = 4;
-
-  String GbuttonText = 'Start';
-  void onPressedCallback() {
-    setState(() {
-      // 현재 버튼 텍스트 확인 후 변경
-      if (GbuttonText == 'Stop') {
-        GbuttonText = 'Start';
-      } else {
-        GbuttonText = 'Stop';
-      }
-    });
-  }
-
-  //메인 부분
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +53,8 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
       ),
       body: Column(
         children: [
+          PrintChordWidget(chords: chords, inversionEnabled: inversionEnabled, previousChordEnabled: previousChordEnabled),
+          TimerButtonsWidget(),
           ToggleButtonsWidget(chords:chords),
         ]
       ),
