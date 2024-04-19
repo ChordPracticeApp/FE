@@ -1,0 +1,20 @@
+void toggleRandomChordGenerator() {
+  if (_timer != null) {
+    _timer!.cancel(); // 타이머가 이미 실행 중인 경우 중지합니다.
+    _timer = null;
+  } else {
+    _timer = Timer.periodic(Duration(seconds: gTime), (timer) {
+      if(previousChordEnabled == true){
+        previousChord = currentChord;
+      } else{
+        previousChord = '';
+      }
+      generateRandomChord();
+      if(currentChord.contains('7')){
+        generateRamdomInversion4();
+      } else{
+        generateRamdomInversion3();
+      }
+    });
+  }
+}
