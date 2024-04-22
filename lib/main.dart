@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:async';
@@ -8,25 +9,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() => runApp(MyApp());
 
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: Size(390, 844),
-      builder: (BuildContext context, Widget? child) => Builder(
-        builder: (BuildContext context) {
-          return MaterialApp(
-            title: 'Random Chord Generator',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-              fontFamily: 'NotoSans',
-            ),
-            home: RandomChordScreen(),
-          );
-        },
-      ),
-    );
+      return MaterialApp(
+        title: 'Random Chord Generator',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          fontFamily: 'NotoSans',
+        ),
+        home: RandomChordScreen(),
+      );
   }
 }
 
@@ -165,24 +158,9 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
     });
   }
 
-  String inversion = '1';  //전위 담당 변수
+  String inversion = '';  //전위 담당 변수
   bool inversionEnabled = true;
   bool previousChordEnabled = true;
-
-  void generateRandomChord() {
-    setState(() {
-      if(chords.isNotEmpty){
-        int randomIndex = Random().nextInt(chords.length);
-        int randomChordIndex = Random().nextInt(chords[randomIndex].length);
-        currentChord = chords[randomIndex][randomChordIndex];
-
-        //중복제거
-        while(previousChord == currentChord){
-          generateRandomChord();
-        }
-      }
-    });
-  }
 
   void toggleinversionEnabledButton() {
     setState(() {
@@ -213,6 +191,21 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
     }
   }
 
+  void generateRandomChord() {
+    setState(() {
+      if(chords.isNotEmpty){
+        int randomIndex = Random().nextInt(chords.length);
+        int randomChordIndex = Random().nextInt(chords[randomIndex].length);
+        currentChord = chords[randomIndex][randomChordIndex];
+
+        //중복제거
+        while(previousChord == currentChord){
+          generateRandomChord();
+        }
+      }
+    });
+  }
+
   Timer? _timer;
   int gTime = 4;
   void toggleRandomChordGenerator() {
@@ -237,9 +230,10 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
   }
 
   String GbuttonText = 'Start';
+
+  // Start/Stop 변경
   void onPressedCallback() {
     setState(() {
-      // 현재 버튼 텍스트 확인 후 변경
       if (GbuttonText == 'Stop') {
         GbuttonText = 'Start';
       } else {
@@ -251,286 +245,293 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
   //메인 부분
   @override
   Widget build(BuildContext context) {
-    generateRandomChord();
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(64),
-        child: AppBar(
+    final Size screenSize = MediaQuery.of(context).size;
+
+    return Container(
+      width: screenSize.width,
+      height: screenSize.height,
+      child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: screenSize.height * 0.075,
           title: Text('Random Chord Generator'),
           backgroundColor: Color(0xff99BEAA),
-        )
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          //앱바 - 전위 여백
-          SizedBox(
-            height: 32,
-            width: 390,
-          ),
-
-          //inversion, pre-chord 버튼
-          SizedBox(
-            width: 248,
-            height: 40,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: toggleinversionEnabledButton,
-                  style: ButtonStyles.InPreButton(inversionEnabled),
-                  child:
-                      Text('Inversion', style: TextStyle(color: Colors.black, fontSize: 16)),
-                ),
-                SizedBox( height:40.0,
-                  width:8.0,
-                ),
-                ElevatedButton(
-                  onPressed: togglePreviousChordEnabledButton,
-                  style: ButtonStyles.InPreButton(previousChordEnabled),
-                  child:
-                      Text('pre-chord', style: TextStyle(color: Colors.black, fontSize: 16)),
-                ),
-              ],
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            //앱바 - 전위 여백
+            SizedBox(
+              width: screenSize.width,
+              height: screenSize.height * 0.04,
             ),
-          ),
 
-          //inversion - 코드 여백
-          SizedBox(
-            height: 56,
-          ),
-
-          //pre 코드
-          /*Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                previousChord,
-                style: TextStyle(fontSize: 40, color: Colors.black.withOpacity(0.8)),
-              ),
-              SizedBox(width: 120)
-            ],
-          ), */
-
-          //현재 코드, 전위 숫자
-          SizedBox(
-            width: 200,
-            height: 113,
-            child: Column(
-              children: [
-                Text(
-                  currentChord,
-                  style: TextStyle(fontSize: 48),
-                  textAlign: TextAlign.center,
-                ),
-                Text(
-                  inversion,
-                  style: TextStyle(fontSize: 24),
-                ),
-              ]
-            )
-          ),
-
-          //코드 - 전환시간 여백
-          SizedBox(height: 103),
-
-          //-1, 전환 시간, +1
-          SizedBox(
-            width: 344,
-            height: 56,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //inversion, pre-chord 버튼
+            SizedBox(
+              width: screenSize.width * 0.636,
+              height: screenSize.height * 0.047,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  //-1 버튼
                   ElevatedButton(
-                    onPressed: () {
-                      if(gTime>=2){
+                    onPressed: toggleinversionEnabledButton,
+                    style: ButtonStyles.InPreButton(inversionEnabled, screenSize),
+                    child:
+                    Text('Inversion', style: TextStyle(color: Colors.black, fontSize: 16)),
+                  ),
+                  SizedBox( width: screenSize.width * 0.030),
+                  ElevatedButton(
+                    onPressed: togglePreviousChordEnabledButton,
+                    style: ButtonStyles.InPreButton(previousChordEnabled, screenSize),
+                    child:
+                    Text('pre-chord', style: TextStyle(color: Colors.black, fontSize: 16)),
+                  ),
+                ],
+              ),
+            ),
+
+            //inversion - 코드 여백
+            SizedBox(
+              height: screenSize.height*0.05,
+            ),
+
+            //pre 코드
+            SizedBox(
+                height: screenSize.height * 0.05,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      previousChord,
+                      style: TextStyle(
+                          fontSize: 40, color: Colors.black.withOpacity(0.8)),
+                    ),
+                    SizedBox(width: 120)
+                  ],
+                ),
+              ),
+
+              //현재 코드, 전위 숫자
+            SizedBox(
+                width: screenSize.width * 0.8,
+                height: screenSize.height * 0.203,
+                child: Column(
+                    children: [
+                      Text(
+                        currentChord,
+                        style: TextStyle(fontSize: screenSize.width * 0.12),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(
+                        inversion,
+                        style: TextStyle(fontSize: screenSize.width * 0.07),
+                      ),
+                    ]
+                )
+            ),
+
+            //코드 - 전환시간 여백
+            SizedBox(height: screenSize.height * 0.01),
+
+            //-1, 전환 시간, +1
+            SizedBox(
+              width: screenSize.width * 0.836,
+              height: screenSize.height * 0.056,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //-1 버튼
+                    ElevatedButton(
+                      onPressed: () {
+                        if(gTime>=2){
+                          setState(() {
+                            if (_timer != null) {
+                              _timer!.cancel(); // 타이머가 이미 실행 중인 경우 중지합니다.
+                              _timer = null;
+                            }
+                            GbuttonText = 'Start';
+                            gTime--;
+                          });
+                        }
+                      },
+                      style: ButtonStyles.TimeButton(screenSize),
+                      child: Text(
+                          '-1',
+                          style: TextStyle(fontSize: screenSize.width * 0.04, color: Colors.white)
+                      ),
+                    ),
+                    //전환 시간
+                    Row(
+                      children: [
+                        Text(
+                          gTime.toString(),
+                          style: TextStyle(fontSize: screenSize.width * 0.08),
+                        ),
+                        Text(
+                          '  sec',
+                          style: TextStyle(fontSize: screenSize.width * 0.02),
+                        ),
+                      ],
+                    ),
+
+                    //+1 버튼
+                    ElevatedButton(
+                      onPressed: () {
                         setState(() {
                           if (_timer != null) {
                             _timer!.cancel(); // 타이머가 이미 실행 중인 경우 중지합니다.
                             _timer = null;
                           }
                           GbuttonText = 'Start';
-                          gTime--;
+                          gTime++;
                         });
-                      }
-                    },
-                    style: ButtonStyles.TimeButton(),
-                    child: Text(
-                        '-1',
-                        style: TextStyle(fontSize: 20, color: Colors.white)
+                      },
+                      style: ButtonStyles.TimeButton(screenSize),
+                      child: Text(
+                          '+1',
+                          style: TextStyle(fontSize: screenSize.width * 0.04, color: Colors.white)
+                      ),
                     ),
-                  ),
-                  //전환 시간
-                  Row(
-                    children: [
-                      Text(
-                        gTime.toString(),
-                        style: TextStyle(fontSize: 30),
-                      ),
-                      Text(
-                        '  sec',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ],
-                  ),
+                  ]
+              ),
+            ),
 
-                  //+1 버튼
+            //전환시간 - 코드버튼 여백
+            SizedBox(height: screenSize.height * 0.08),
+
+            //코드버튼 1
+            SizedBox(
+              width: screenSize.width * 0.836,
+              height: screenSize.height * 0.056,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        if (_timer != null) {
-                          _timer!.cancel(); // 타이머가 이미 실행 중인 경우 중지합니다.
-                          _timer = null;
-                        }
-                        GbuttonText = 'Start';
-                        gTime++;
-                      });
-                    },
-                    style: ButtonStyles.TimeButton(),
-                    child: Text(
-                        '+1',
-                        style: TextStyle(fontSize: 20, color: Colors.white)
-                    ),
+                    onPressed: toggleMajorButton,
+                    style: ButtonStyles.ChordButton(majorButtonEnabled, screenSize),
+                    child: Text('Major', style: TextStyle(color: Colors.black, fontSize: 16)),
                   ),
-                ]
+                  SizedBox(
+                    width: 8,
+                  ),
+                  ElevatedButton(
+                    onPressed: toggleMinorButton,
+                    style:ButtonStyles.ChordButton(minorButtonEnabled, screenSize),
+                    child: Text('Minor', style: TextStyle(color: Colors.black, fontSize: 16)),
+                  ),
+                ],
+              ),
             ),
-          ),
 
-          //전환시간 - 코드버튼 여백
-          SizedBox(height: 8),
-
-          //코드버튼 1
-          SizedBox(
-            width: 344,
-            height: 56,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: toggleMajorButton,
-                  style: ButtonStyles.ChordButton(majorButtonEnabled),
-                  child: Text('Major', style: TextStyle(color: Colors.black, fontSize: 16)),
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                ElevatedButton(
-                  onPressed: toggleMinorButton,
-                  style:ButtonStyles.ChordButton(minorButtonEnabled),
-                  child: Text('Minor', style: TextStyle(color: Colors.black, fontSize: 16)),
-                ),
-              ],
+            //코드버튼 1-2 여백
+            SizedBox(
+                height: screenSize.height * 0.008
             ),
-          ),
 
-          //코드버튼 1-2 여백
-          SizedBox(
-            height: 8
-          ),
-
-          //코드버튼 2
-          SizedBox(
-            width: 344,
-            height: 56,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: toggleAugButton,
-                  style: ButtonStyles.ChordButton(augButtonEnabled),
-                  child: Text('Aug', style: TextStyle(color: Colors.black, fontSize: 16)),
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                ElevatedButton(
-                  onPressed: toggleDimButton,
-                  style: ButtonStyles.ChordButton(dimButtonEnabled),
-                  child: Text('Dim', style: TextStyle(color: Colors.black, fontSize: 16)),
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                ElevatedButton(
-                  onPressed: toggleSus2Button,
-                  style: ButtonStyles.ChordButton(sus2ButtonEnabled),
-                  child: Text('Sus2', style: TextStyle(color: Colors.black, fontSize: 16)),
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                ElevatedButton(
-                  onPressed: toggleSus4Button,
-                  style: ButtonStyles.ChordButton(sus4ButtonEnabled),
-                  child: Text('Sus4', style: TextStyle(color: Colors.black, fontSize: 16)),
-                ),
-              ],
+            //코드버튼 2
+            SizedBox(
+              width: screenSize.width * 0.836,
+              height: screenSize.height * 0.056,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: toggleAugButton,
+                    style: ButtonStyles.ChordButton(augButtonEnabled, screenSize),
+                    child: Text('Aug', style: TextStyle(color: Colors.black, fontSize: 16)),
+                  ),
+                  SizedBox(
+                      width: screenSize.width * 0.008
+                  ),
+                  ElevatedButton(
+                    onPressed: toggleDimButton,
+                    style: ButtonStyles.ChordButton(dimButtonEnabled, screenSize),
+                    child: Text('Dim', style: TextStyle(color: Colors.black, fontSize: 16)),
+                  ),
+                  SizedBox(
+                      width: screenSize.width * 0.008
+                  ),
+                  ElevatedButton(
+                    onPressed: toggleSus2Button,
+                    style: ButtonStyles.ChordButton(sus2ButtonEnabled, screenSize),
+                    child: Text('Sus2', style: TextStyle(color: Colors.black, fontSize: 16)),
+                  ),
+                  SizedBox(
+                      width: screenSize.width * 0.008
+                  ),
+                  ElevatedButton(
+                    onPressed: toggleSus4Button,
+                    style: ButtonStyles.ChordButton(sus4ButtonEnabled, screenSize),
+                    child: Text('Sus4', style: TextStyle(color: Colors.black, fontSize: 16)),
+                  ),
+                ],
+              ),
             ),
-          ),
 
-          //코드버튼 2-3 여백
-          SizedBox(
-              height: 8
-          ),
-
-          //코드버튼 3
-          SizedBox(
-            width: 344,
-            height: 56,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: toggleM7Button,
-                  style: ButtonStyles.ChordButton(M7ButtonEnabled),
-                  child: Text('M7', style: TextStyle(color: Colors.black, fontSize: 16)),
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                ElevatedButton(
-                  onPressed: togglem7Button,
-                  style: ButtonStyles.ChordButton(m7ButtonEnabled),
-                  child: Text('m7', style: TextStyle(color: Colors.black, fontSize: 16)),
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                ElevatedButton(
-                  onPressed: toggle7Button,
-                  style: ButtonStyles.ChordButton(sevenButtonEnabled),
-                  child: Text('7', style: TextStyle(color: Colors.black, fontSize: 16)),
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                ElevatedButton(
-                  onPressed: togglemM7Button,
-                  style: ButtonStyles.ChordButton(mM7ButtonEnabled),
-                  child: Text('mM7', style: TextStyle(color: Colors.black, fontSize: 16)),
-                ),
-              ],
+            //코드버튼 2-3 여백
+            SizedBox(
+                height: screenSize.height * 0.008
             ),
-          ),
 
-          SizedBox(height: 24),
-
-          //Start,Stop 버튼
-          ElevatedButton(
-            onPressed : (){
-              previousChord = '';
-              currentChord = '';
-              toggleRandomChordGenerator(); onPressedCallback();
-            },
-            child: Text(
-              GbuttonText,
-              style: TextStyle(fontSize: 20, color: Colors.white),
+            //코드버튼 3
+            SizedBox(
+              width: screenSize.width * 0.836,
+              height: screenSize.height * 0.056,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: toggleM7Button,
+                    style: ButtonStyles.ChordButton(M7ButtonEnabled, screenSize),
+                    child: Text('M7', style: TextStyle(color: Colors.black, fontSize: 16)),
+                  ),
+                  SizedBox(
+                    width: screenSize.width * 0.008,
+                  ),
+                  ElevatedButton(
+                    onPressed: togglem7Button,
+                    style: ButtonStyles.ChordButton(m7ButtonEnabled, screenSize),
+                    child: Text('m7', style: TextStyle(color: Colors.black, fontSize: 16)),
+                  ),
+                  SizedBox(
+                    width: screenSize.width * 0.008,
+                  ),
+                  ElevatedButton(
+                    onPressed: toggle7Button,
+                    style: ButtonStyles.ChordButton(sevenButtonEnabled, screenSize),
+                    child: Text('7', style: TextStyle(color: Colors.black, fontSize: 16)),
+                  ),
+                  SizedBox(
+                    width: screenSize.width * 0.008,
+                  ),
+                  ElevatedButton(
+                    onPressed: togglemM7Button,
+                    style: ButtonStyles.ChordButton(mM7ButtonEnabled, screenSize),
+                    child: Text('mM7', style: TextStyle(color: Colors.black, fontSize: 16)),
+                  ),
+                ],
+              ),
             ),
-            style: ButtonStyles.StartStopButton(GbuttonText)
-          ),
+
+            SizedBox(height: screenSize.height * 0.024),
+
+            //Start,Stop 버튼
+            ElevatedButton(
+                onPressed : (){
+                  // previousChord = '';
+                  // currentChord = '';
+                  toggleRandomChordGenerator();
+                  onPressedCallback();
+                },
+                child: Text(
+                  GbuttonText,
+                  style: TextStyle(fontSize: screenSize.width * 0.02, color: Colors.white),
+                ),
+                style: ButtonStyles.StartStopButton(GbuttonText, screenSize)
+            ),
           ],
-      ),
+        ),
+      )
     );
   }
 }
