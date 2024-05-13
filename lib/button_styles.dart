@@ -41,7 +41,7 @@ class ButtonStyles {
           borderRadius: BorderRadius.circular(8.0),
           side: BorderSide(color: Color(0xff99BEAA)),
         ),
-        fixedSize: Size(screenSize.width * 0.300, screenSize.height * 0.047),
+        fixedSize: Size(screenSize.width * 0.305, screenSize.height * 0.047),
         backgroundColor: Color(0xffFFFFFF),
       );
     } else {

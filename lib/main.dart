@@ -267,7 +267,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
 
             //inversion, pre-chord 버튼
             SizedBox(
-              width: screenSize.width * 0.636,
+              width: screenSize.width * 0.650,
               height: screenSize.height * 0.047,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -369,7 +369,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
                         ),
                         Text(
                           '  sec',
-                          style: TextStyle(fontSize: screenSize.width * 0.02),
+                          style: TextStyle(fontSize: screenSize.width * 0.04),
                         ),
                       ],
                     ),
@@ -525,7 +525,7 @@ class _RandomChordScreenState extends State<RandomChordScreen> {
                 },
                 child: Text(
                   GbuttonText,
-                  style: TextStyle(fontSize: screenSize.width * 0.02, color: Colors.white),
+                  style: TextStyle(fontSize: screenSize.width * 0.05, color: Colors.white),
                 ),
                 style: ButtonStyles.StartStopButton(GbuttonText, screenSize)
             ),
